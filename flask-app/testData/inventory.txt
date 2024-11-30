@@ -1,0 +1,197 @@
+Item: Pitt Panthers 80s Jersey
+Size: M
+Value: $150
+Short Description: Vintage blue and gold Pitt Panthers jersey with player name and number.
+Era: 1980s
+
+Item: Pitt Panthers 90s Starter Jacket
+Size: L
+Value: $200
+Short Description: Blue and gold embroidered jacket with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s T-Shirt
+Size: S
+Value: $30
+Short Description: Classic Pitt Panthers t-shirt with team logo.
+Era: 1980s
+
+Item: Pitt Panthers 90s Hoodie
+Size: M
+Value: $80
+Short Description: Fleece hoodie with Pitt Panthers logo on the chest.
+Era: 1990s
+
+Item: Pitt Panthers 2000s Snapback Hat
+Size: Adjustable
+Value: $25
+Short Description: Blue and gold snapback with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 80s Sweatshirt
+Size: L
+Value: $50
+Short Description: Heavyweight sweatshirt with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 90s Long Sleeve Shirt
+Size: M
+Value: $40
+Short Description: Long sleeve shirt with Pitt Panthers logo on the sleeve.
+Era: 1990s
+
+Item: Pitt Panthers 2000s Polo Shirt
+Size: L
+Value: $60
+Short Description: Blue and gold polo shirt with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 80s Letterman Jacket
+Size: M
+Value: $300
+Short Description: Classic letterman jacket with Pitt Panthers logo and lettering.
+Era: 1980s
+
+Item: Pitt Panthers 90s Windbreaker
+Size: L
+Value: $70
+Short Description: Lightweight windbreaker with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 90s Sweatpants
+Size: L
+Value: $40
+Short Description: Cozy sweatpants with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Mesh Cap
+Size: Adjustable
+Value: $20
+Short Description: Mesh cap with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Scarf
+Size: One Size
+Value: $25
+Short Description: Knitted scarf with Pitt Panthers colors.
+Era: 2000s
+
+Item: Pitt Panthers 90s Baseball Jersey
+Size: M
+Value: $60
+Short Description: Button-down baseball jersey with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Track Jacket
+Size: L
+Value: $80
+Short Description: Retro track jacket with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Beanie
+Size: One Size
+Value: $15
+Short Description: Knitted beanie with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 90s Crewneck Sweatshirt
+Size: M
+Value: $45
+Short Description: Comfortable crewneck with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Wind Pants
+Size: L
+Value: $35
+Short Description: Wind-resistant pants with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Tank Top
+Size: S
+Value: $25
+Short Description: Sleeveless tank top with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 90s Gym Shorts
+Size: M
+Value: $20
+Short Description: Athletic shorts with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Fanny Pack
+Size: One Size
+Value: $20
+Short Description: Fanny pack with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Wristbands
+Size: One Size
+Value: $10
+Short Description: Pair of wristbands with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 90s Button-Up Shirt
+Size: M
+Value: $35
+Short Description: Casual button-up shirt with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Varsity Sweater
+Size: L
+Value: $90
+Short Description: Knitted varsity sweater with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Track Pants
+Size: L
+Value: $50
+Short Description: Track pants with Pitt Panthers logo and stripes.
+Era: 2000s
+
+Item: Pitt Panthers 90s Baseball Cap
+Size: Adjustable
+Value: $25
+Short Description: Cap with adjustable strap and Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Polo Shirt
+Size: M
+Value: $40
+Short Description: Polo shirt with embroidered Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Duffel Bag
+Size: One Size
+Value: $35
+Short Description: Sports duffel bag with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 90s Sports Bra
+Size: M
+Value: $30
+Short Description: Athletic sports bra with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Rain Jacket
+Size: L
+Value: $75
+Short Description: Waterproof rain jacket with Pitt Panthers logo.
+Era: 1980s
+
+Item: Pitt Panthers 2000s Headband
+Size: One Size
+Value: $10
+Short Description: Sweat-wicking headband with Pitt Panthers logo.
+Era: 2000s
+
+Item: Pitt Panthers 90s Rugby Shirt
+Size: M
+Value: $50
+Short Description: Striped rugby shirt with Pitt Panthers logo.
+Era: 1990s
+
+Item: Pitt Panthers 80s Warm-Up Jacket
+Size: L
+Value: $70
+Short Description: Warm-up jacket with Pitt Panthers logo.
+Era: 1980s
