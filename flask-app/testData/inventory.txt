@@ -1,3 +1,5 @@
+Vintage Pitt Clothing Inventory
+
 Item: Pitt Panthers 80s Jersey
 Size: M
 Value: $150
