@@ -11,17 +11,15 @@ from langchain import hub
 from typing_extensions import List, TypedDict
 from langgraph.graph import START, StateGraph
 
+load_dotenv()
+os.environ.get('OPENAI_API_KEY')
+os.environ.get('LANGCHAIN_API_KEY')
+
 # keys
 class AIEngine:
 
+    # setup
     def __init__(self):
-
-        load_dotenv()
-        os.environ.get('OPENAI_API_KEY')
-        os.environ.get('LANGCHAIN_API_KEY')
-
-        #setup
-
         # chat model
         self.llm = ChatOpenAI(model="gpt-4o-mini")
         # print(f"chat model setup")
