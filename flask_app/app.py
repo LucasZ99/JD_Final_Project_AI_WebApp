@@ -7,7 +7,9 @@ from flask_app.aiEngine import AIEngine
 
 UPLOAD_FOLDER = './testData'
 ALLOWED_EXTENSIONS = {'txt'}
-QUESTION ="curate a list from 1 to 5 of 5 cold weather items from my inventory to post on my instagram in a vintage pitt winter clothing drop announcement. Also tell me how to schedule the daily posts i.e. time of day, what days of the week, and post order for maximum post engagement"
+QUESTION =("curate a list from 1 to 5 of 5 cold weather items from my inventory to post on my instagram in a "
+           "vintage pitt winter clothing drop announcement. Also tell me how to schedule the daily posts i.e. time of "
+           "day, what days of the week, and post order for maximum post engagement")
 
 
 app = Flask(__name__)
@@ -30,6 +32,7 @@ def load_data():
     filename = secure_filename(file.filename)
     destination = "/".join([target, filename])
     file.save(destination)
+
 
     # embed the data into the rag pipeline
     ai_engine.load_data()

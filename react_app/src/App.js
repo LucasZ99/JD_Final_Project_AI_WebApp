@@ -1,12 +1,15 @@
 import axios from 'axios';
-import React, { Component } from "react";
+import * as React from 'react';
+import Button from '@mui/material/Button'
+import "./App.css";
+import {AppBar, Box, Card, CardActionArea, DialogTitle, Input, Typography} from "@mui/material";
 
-class App extends Component {
+
+class App extends React.Component {
     state = {
         selectedFile: null,
         llm_response: null
     };
-
     onFileChange = (event) => {
         this.setState({ selectedFile: event.target.files[0] });
     };
@@ -25,8 +28,15 @@ class App extends Component {
         axios.post("/api/load_data", formData)
             .then(response =>{
                 console.log("File upload response:", response);
-                return axios.get("api/llm/response");
             })
+            .catch(error =>{
+                console.error(error);
+            })
+
+    };
+
+    onGetLLMResponse = () => {
+        axios.get("api/llm/response")
             .then(response =>{
                 this.setState({llm_response: response.data});
                 console.log("llm response:", response);
@@ -37,53 +47,116 @@ class App extends Component {
 
     };
 
-    // display file content after uploading file
-
-    fileData = () => {
-        if(this.state.selectedFile){
-            if(this.state.llm_response) {
-                return (
-                    <div>
-                        <h2>File Details:</h2>
-                        <p>File Name: {this.state.selectedFile.name}</p>
-
-                        <h2>LLM Response</h2>
-                        <p>{this.state.llm_response}</p>
-                    </div>
-                );
-            }
-            else{
-                return (
-                    <div>
-                        <h2>File Details:</h2>
-                        <p>File Name: {this.state.selectedFile.name}</p>
-                        <p>LLM Response not available</p>
-                    </div>
-                );
-            }
-        } else {
-            return (
-                <div>
-                    <br/>
-                    <h4>Choose file before pressing upload button</h4>
-                    <p>LLM Response not available</p>
-                </div>
+    scheduleData = () => {
+        if(this.state.llm_response){
+            return(
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    width="auto"
+                    height="auto"
+                >
+                    <Card
+                        sx={{ maxWidth: 400, p: 2}}
+                        elevation={12}
+                        alignItems = "left"
+                    >
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 1 }} align={"left"}>
+                            Recommended Post Schedule
+                        </Typography>
+                        <Typography variant="body1" component="div" sx={{ flexGrow: 1, p: 1 }} align={"left"}>
+                            {this.state.llm_response}
+                        </Typography>
+                    </Card>
+                </Box>
             );
         }
-    };
+        else{
+            return(
+               <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    width="auto"
+                    height="auto"
+                >
+                    <Card
+                        sx={{ maxWidth: 400, p: 2}}
+                        elevation={12}
+                        alignItems = "left"
+                    >
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 1 }} align={"left"}>
+                            Generate Post Schedule
+                        </Typography>
+                    </Card>
+                </Box>
+            );
+        }
+    }
 
     render() {
         return(
-            <div>
-                <h1>Elcon Threads</h1>
-                <h3>Upload your file so the AI can process it</h3>
-                <div>
-                    <input type="file" onChange={this.onFileChange} />
-                    <button onClick={this.onFileUpload}>Upload File</button>
-                </div>
-                {this.fileData()}
-            </div>
+            <>
+            <Box sx = {{flexGrow: 1}}>
+                <AppBar position = {"static"}>
+                  <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 1 }} align={"center"}>
+                        Post Scheduler v0
+                  </Typography>
+                </AppBar>
+            </Box>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                width="auto"
+                height="auto"
+            >
+                <Card
+                    sx={{ maxWidth: 400, p: 2}}
+                    elevation={12}
+                    alignItems = "center"
+                >
+                    <DialogTitle align={"center"}>Upload Inventory File</DialogTitle>
+                    <CardActionArea>
+                        <label htmlFor="file-input">
+                            <Input id="file-input" type="file" onChange={this.onFileChange}/>
+                        </label>
+                        <Box
+                            display={"flex"}
+                            justifyContent={"flex-end"}
+                        >
+                            <Button
+                            variant="contained"
+                            onClick={this.onFileUpload}
+                            >
+                            Upload File
+                            </Button>
+                        </Box>
+                    </CardActionArea>
+                </Card>
+            </Box>
+
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                width="auto"
+                height="auto" // Full viewport height
+                >
+                <Button
+                    variant="contained"
+                    onClick={this.onGetLLMResponse}
+                    elevation={12}
+                >
+                    Generate Schedule
+                </Button>
+            </Box>
+            {this.scheduleData()}
+            </>
+
         );
     }
 }
+
 export default App;
