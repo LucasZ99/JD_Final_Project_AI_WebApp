@@ -38,11 +38,16 @@ def load_data():
 
     return response
 
-@app.route('/api/llm/response', methods=['GET'])
+
+@app.route('/api/llm/build_schedule', methods=['GET'])
 def llm_response():
     answer = ai_engine.invoke_model(CONSTANTS.QUESTION)
     return jsonify(answer)
 
+@app.route('/api/llm/chat_question', methods=['POST'])
+def chat_question():
+    answer = ai_engine.invoke_model(str(request.data))
+    return jsonify(answer)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -77,7 +77,6 @@ class AIEngine:
                 add_start_index=True,
             )
             splits = text_splitter.split_documents(docs)
-            print(f"Split into {len(splits)} sub-documents.")
 
             # embed the documents into vector DB
             self.vector_store.add_documents(documents=splits)
@@ -121,8 +120,9 @@ class AIEngine:
 
 def main():
     # testing
-    question = ("curate a list from 1 to 5 of 5 cold weather items from my inventory to post on my instagram in a vintage pitt winter clothing drop announcement. "
-                "Also tell me how to schedule the daily posts i.e. time of day, what days of the week, and post order for maximum post engagement")
+    # question = ("curate a list from 1 to 5 of 5 cold weather items from my inventory to post on my instagram in a vintage pitt winter clothing drop announcement. "
+    #             "Also tell me how to schedule the daily posts i.e. time of day, what days of the week, and post order for maximum post engagement")
+    question = "what is the most valuable item in my inventory? What makes it so valuable?"
     ai_engine = AIEngine()
     ai_engine.load_data()
     ai_engine.compile_model()
