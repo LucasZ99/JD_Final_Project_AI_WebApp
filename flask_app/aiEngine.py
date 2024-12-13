@@ -1,3 +1,4 @@
+import logging
 import os
 from typing import Dict, List
 
@@ -15,6 +16,8 @@ load_dotenv()
 os.environ.get('OPENAI_API_KEY')
 os.environ.get('LANGCHAIN_API_KEY')
 
+logger = logging.getLogger(__name__)
+
 # keys
 class AIEngine:
 
@@ -22,16 +25,35 @@ class AIEngine:
     # setup
     def __init__(self):
         # chat model
-        self.llm = ChatOpenAI(model="gpt-4o-mini")
-        # print(f"chat model setup")
+        try:
+            self.llm = ChatOpenAI(model="gpt-4o-mini")
+            if self.llm:
+                logger.log(level=logging.INFO, msg="chat model setup")
+            else:
+                logger.log(level=logging.ERROR, msg="chat model setup failure")
+        except Exception as e:
+            logger.log(level=logging.ERROR, msg=f"chat model setup failed: {str(e)}")
 
         # embeddings model
-        self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-        # print(f"embeddings model setup")
+        try:
+            self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+            if self.embeddings:
+                logger.log(level=logging.INFO, msg="embeddings model setup")
+            else:
+                logger.log(level=logging.ERROR, msg="embeddings model setup failure")
+        except Exception as e:
+            logger.log(level=logging.ERROR, msg=f"embeddings model setup failed: {str(e)}")
 
         # vector store for semantic search
-        # vector_store = Chroma(embedding_function=embeddings)
-        self.vector_store = InMemoryVectorStore(self.embeddings)
+        try:
+            self.vector_store = InMemoryVectorStore(self.embeddings)
+            if self.vector_store:
+                logger.log(level=logging.INFO, msg="vector store model setup")
+            else:
+                logger.log(level=logging.ERROR, msg="vector store model setup failure")
+        except Exception as e:
+            logger.log(level=logging.ERROR, msg=f"vector store setup failed: {str(e)}")
+
 
         self.docs = None
         self.prompt = hub.pull("rlm/rag-prompt")
@@ -39,25 +61,28 @@ class AIEngine:
 
     def load_data(self) -> None:
         # load the source data
-        loader = DirectoryLoader("testData")
-        # print(f"directory loader setup")
+        try:
+            loader = DirectoryLoader("testData")
+            docs = loader.load()
 
-        # Load the data from the directory source
-        docs = loader.load()
-        print(f"docs loaded")
-        print(f"Total characters: {len(docs[0].page_content)}")
+
+        # # Load the data from the directory source
+        # print(f"docs loaded")
+        # print(f"Total characters: {len(docs[0].page_content)}")
 
         # split up the text into smaller pieces for the model to ingest
-        text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=2000,
-            chunk_overlap=400,
-            add_start_index=True,
-        )
-        splits = text_splitter.split_documents(docs)
-        print(f"Split into {len(splits)} sub-documents.")
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=2000,
+                chunk_overlap=400,
+                add_start_index=True,
+            )
+            splits = text_splitter.split_documents(docs)
+            print(f"Split into {len(splits)} sub-documents.")
 
-        # embed the documents into vector DB
-        self.vector_store.add_documents(documents=splits)
+            # embed the documents into vector DB
+            self.vector_store.add_documents(documents=splits)
+        except Exception as e:
+            logger.log(level=logging.ERROR, msg=f"load_data failed: {str(e)}")
 
     # RAG
     # LangGraph setup

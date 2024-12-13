@@ -1,3 +1,4 @@
+import logging
 import os
 
 from flask import Flask, jsonify, request, session
@@ -10,17 +11,15 @@ ALLOWED_EXTENSIONS = {'txt'}
 QUESTION =("curate a list from 1 to 5 of 5 cold weather items from my inventory to post on my instagram in a "
            "vintage pitt winter clothing drop announcement. Also tell me how to schedule the daily posts i.e. time of "
            "day, what days of the week, and post order for maximum post engagement")
-
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+logger = logging.getLogger(__name__)
 
-ai_engine = AIEngine()
-ai_engine.compile_model()
-
-@app.route('/api/greeting', methods=['GET'])
-def hello_world():
-    return jsonify(message='Hello, Sam!')
+try:
+    ai_engine = AIEngine()
+    ai_engine.compile_model()
+except Exception as e:
+    logger.error(e)
 
 @app.route('/api/load_data', methods=['POST'])
 def load_data():
@@ -32,13 +31,15 @@ def load_data():
     filename = secure_filename(file.filename)
     destination = "/".join([target, filename])
     file.save(destination)
-
-
     # embed the data into the rag pipeline
-    ai_engine.load_data()
+    try:
+        ai_engine.load_data()
+        # session['uploadFilePath'] = destination
+        response = f"file saved at {destination}"
+    except Exception as e:
+        response = f"file not embedded: {str(e)}"
+        logger.log(level=logging.ERROR, msg=response)
 
-    # session['uploadFilePath'] = destination
-    response = "file saved at {destination}".format(destination=destination)
     return response
 
 @app.route('/api/llm/response', methods=['GET'])
