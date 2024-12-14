@@ -19,6 +19,7 @@ class App extends React.Component {
 
     onQuestionChange = (event) => {
         this.setState({chat_question: event.target.value});
+        console.log(event.target.value);
     }
 
     onFileUpload = () =>{
@@ -53,7 +54,12 @@ class App extends React.Component {
     };
 
     onGetQuestionResponse = () => {
-        axios.post(CHAT_QUESTION, this.state.question_answer)
+        const data = {
+            question: this.state.chat_question
+        };
+        axios.post(CHAT_QUESTION, data, {
+            headers: {'Content-Type': 'application/json'}
+        })
             .then(response =>{
                 this.setState({question_answer: response.data});
                 console.log("Question answer:", response);

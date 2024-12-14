@@ -46,7 +46,8 @@ def llm_response():
 
 @app.route('/api/llm/chat_question', methods=['POST'])
 def chat_question():
-    answer = ai_engine.invoke_model(str(request.data))
+    data = request.get_json()
+    answer = ai_engine.invoke_model(data['question'])
     return jsonify(answer)
 
 if __name__ == '__main__':
