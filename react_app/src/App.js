@@ -2,20 +2,54 @@ import axios from 'axios';
 import * as React from 'react';
 import Button from '@mui/material/Button'
 import "./App.css";
-import {AppBar, Box, Card, CardActionArea, CardContent, DialogTitle, Input, TextField, Typography} from "@mui/material";
+import {
+    AppBar,
+    Box,
+    Card,
+    CardActionArea,
+    CardContent, Checkbox,
+    DialogTitle, FormControlLabel,
+    FormGroup,
+    Input,
+    TextField,
+    Typography
+} from "@mui/material";
 import "./ROUTES.js"
 import {BUILD_SCHEDULE, CHAT_QUESTION, UPLOAD_DATA} from "./ROUTES";
 
 class App extends React.Component {
     state = {
-        selectedFile: null,
+        selected_file: null,
         llm_response: null,
         chat_question: null,
-        question_answer: null
+        question_answer: null,
+        num_items: 5,
+        incl_prices: null,
+        start_date: null,
+        end_date: null,
+    }
+
+    handleInclPricesChange = (event) => {
+            this.setState({incl_prices: event.target.checked});
     };
+
+    handleStartDateChange = (event) => {
+        this.setState({start_date: event.target.value});
+    };
+
+    handleEndDateChange = (event) => {
+        this.setState({end_date: event.target.value});
+    };
+
+    handleNumItemsChange = (event) => {
+        this.setState({num_items: event.target.value});
+    }
+
     onFileChange = (event) => {
         this.setState({ selectedFile: event.target.files[0] });
     };
+
+
 
     onQuestionChange = (event) => {
         this.setState({chat_question: event.target.value});
@@ -26,11 +60,11 @@ class App extends React.Component {
         const formData = new FormData();
         formData.append(
             'file',
-            this.state.selectedFile,
-            this.state.selectedFile.name
+            this.state.selected_file,
+            this.state.selected_file.name
         );
 
-        console.log(this.state.selectedFile);
+        console.log(this.state.selected_file);
 
         // send request to backend
         axios.post(UPLOAD_DATA, formData)
@@ -43,14 +77,15 @@ class App extends React.Component {
     };
 
     onGetScheduleResponse = () => {
-        axios.get(BUILD_SCHEDULE)
-            .then(response =>{
-                this.setState({llm_response: response.data});
-                console.log("llm response:", response);
-            })
-            .catch(error =>{
-                console.error(error);
-            })
+        console.log(this.state.start_date + "\n" + this.state.end_date + "\n" + this.state.num_items + "\n" + this.state.incl_prices);
+        // axios.get(BUILD_SCHEDULE)
+        //     .then(response =>{
+        //         this.setState({llm_response: response.data});
+        //         console.log("llm response:", response);
+        //     })
+        //     .catch(error =>{
+        //         console.error(error);
+        //     })
     };
 
     onGetQuestionResponse = () => {
@@ -133,6 +168,8 @@ class App extends React.Component {
     }
     scheduleData = () => {
             return(
+                <>
+
                 <Box
                     display="flex-grow"
                     justifyContent="center"
@@ -144,13 +181,38 @@ class App extends React.Component {
                         alignItems = {"center"}
                     >
                         <CardActionArea>
-                            <Box
-                                display="flex-grow"
-                                justifyContent="center"
-                                alignItems="center"
-                                width="auto"
-                                height="auto" // Full viewport height
+                            <FormGroup>
+
+                                <Checkbox
+                                    checked ={this.state.incl_prices}
+                                    onChange={this.state.handleInclPricesChange}
                                 >
+                                    Include Prices
+                                </Checkbox>
+                                <TextField
+                                    required={true}
+                                    id={"outlined-required"}
+                                    label={"# Items"}
+                                    defaultValue={5}
+                                    value={this.state.num_items}
+                                    onChange={this.handleNumItemsChange}
+                                />
+                                <TextField
+                                    type={"date"}
+                                    required={true}
+                                    id={"outlined-required"}
+                                    label={"Start Date"}
+                                    value={this.state.start_date}
+                                    onChange={this.handleStartDateChange}
+                                />
+                                <TextField
+                                    type={"date"}
+                                    required={true}
+                                    id={"outlined-required"}
+                                    label={"End Date"}
+                                    value={this.state.start_date}
+                                    onChange={this.handleEndDateChange}
+                                />
                                 <Button
                                     variant="contained"
                                     onClick={this.onGetScheduleResponse}
@@ -159,7 +221,8 @@ class App extends React.Component {
                                 >
                                     Generate Schedule
                                 </Button>
-                            </Box>
+                            </FormGroup>
+
                         </CardActionArea>
                         <CardContent>
                             <Typography variant="h6" component="div" align={"center"}>
@@ -171,7 +234,8 @@ class App extends React.Component {
                         </CardContent>
                     </Card>
                 </Box>
-            );
+                </>
+                );
     }
 
     inventoryCard = () =>{
