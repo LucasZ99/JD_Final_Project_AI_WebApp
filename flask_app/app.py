@@ -39,15 +39,17 @@ def load_data():
     return response
 
 
-@app.route('/api/llm/build_schedule', methods=['GET'])
+@app.route('/api/llm/build_schedule', methods=['POST'])
 def llm_response():
-    answer = ai_engine.invoke_model(CONSTANTS.QUESTION)
+    data = request.get_json()
+    ai_engine.set_question(data)
+    answer = ai_engine.invoke_model()
     return jsonify(answer)
 
 @app.route('/api/llm/chat_question', methods=['POST'])
 def chat_question():
     data = request.get_json()
-    answer = ai_engine.invoke_model(data['question'])
+    answer = ai_engine.invoke_model_custom_prompt(data['question'])
     return jsonify(answer)
 
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
 import logging
 import os
+from turtledemo.penrose import start
 from typing import Dict, List
 
 from dotenv import load_dotenv
@@ -58,6 +59,7 @@ class AIEngine:
         self.docs = None
         self.prompt = hub.pull("rlm/rag-prompt")
         self.graph = None
+        self.question = None
 
     def load_data(self) -> None:
         # load the source data
@@ -113,9 +115,30 @@ class AIEngine:
         graph_builder.add_edge(START, "retrieve")
         self.graph = graph_builder.compile()
 
-    def invoke_model(self, question) -> str:
+    def invoke_model(self) -> str:
+        response = self.graph.invoke({"question": self.question})
+        return response["answer"]
+
+    def invoke_model_custom_prompt(self, question) -> str:
         response = self.graph.invoke({"question": question})
         return response["answer"]
+
+    def set_question(self, question_params):
+        num_items = question_params["num_items"]
+        start_date = question_params["start_date"]
+        end_date = question_params["end_date"]
+        additional_info = question_params["additional_info"]
+
+        self.question =  (f"You are a vintage clothing owner that sells their items on Instagram. Create a numbered "
+                          f"list of the items to sell in order by postDate. Use the following CSV Format:\n\n"
+                          f"Number, Item Name, Post Date, Post Time, Item Price\n\n"
+                          f"Use the following parameters to curate the list:\n\n"
+                          f"Number of items (how many items should be included in the drop): {num_items}\n"
+                          f"Start Date (the date of the first item drop): {start_date}\n"
+                          f"End Date (The date the last item of the drop should be posted): {end_date}\n"
+                          f"Additional Information (information specifying the type of drop and specific curation "
+                          f"requests): {additional_info}\n"
+                          f"Include the CSV headers previously mentioned. Don't delimit the response with '''")
 
 
 def main():
