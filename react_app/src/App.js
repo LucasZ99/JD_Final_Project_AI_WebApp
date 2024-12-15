@@ -140,6 +140,7 @@ class App extends React.Component {
             );
         }
     }
+
     fileInput = () =>{
         return(
             <Box
@@ -180,6 +181,7 @@ class App extends React.Component {
             </Box>
         );
     }
+
     scheduleInput = () => {
             return(
                 <>
@@ -255,6 +257,7 @@ class App extends React.Component {
                 </>
             );
     }
+
     scheduleOutput = () => {
         if(this.state.llm_response) {this.parseScheduleResponse()}
         if(this.state.parsed_schedule) {
@@ -286,6 +289,7 @@ class App extends React.Component {
             );
         }
     }
+
     inventoryCard = () => {
         return (
             <Box
@@ -334,7 +338,7 @@ class App extends React.Component {
                 <Box display={"flex-grow"}>
                     <AppBar position = {"static"}>
                       <Typography variant="h6" component="div" sx={{ flexGrow: 1, p: 1 }} align={"center"}>
-                            Post Scheduler v0
+                            Post Scheduler v1
                       </Typography>
                     </AppBar>
                 </Box>
