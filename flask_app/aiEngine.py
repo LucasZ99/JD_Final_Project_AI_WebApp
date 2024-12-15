@@ -1,17 +1,15 @@
 import logging
 import os
-from turtledemo.penrose import start
-from typing import Dict, List
 
 from dotenv import load_dotenv
+from langchain import hub
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain import hub
-from typing_extensions import List, TypedDict
 from langgraph.graph import START, StateGraph
+from typing_extensions import List, TypedDict
 
 load_dotenv()
 os.environ.get('OPENAI_API_KEY')
